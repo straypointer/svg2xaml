@@ -43,7 +43,17 @@ namespace Svg2Xaml
       : base(document, parent, svgElement)
     {
       // ...
+		  XAttribute width_attribute = svgElement.Attribute("width");
+		  if (width_attribute != null)
+			  this.Width = SvgLength.Parse(width_attribute.Value);
+
+		  XAttribute height_attribute = svgElement.Attribute("height");
+		  if (height_attribute != null)
+			  this.Height = SvgLength.Parse(height_attribute.Value);
     }
+
+	public SvgLength Height { get; private set; }
+	public SvgLength Width { get; private set; }
 
   } // class SvgSVGElement
 

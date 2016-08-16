@@ -51,7 +51,7 @@ namespace Svg2Xaml
     public SvgDrawableContainerBaseElement(SvgDocument document, SvgBaseElement parent, XElement drawableContainerElement)
       : base(document, parent, drawableContainerElement)
     {
-      XAttribute viewBox_attribute = drawableContainerElement.Attribute("viewBox");
+      XAttribute viewBox_attribute = drawableContainerElement.Attribute("viewbox");
       if (viewBox_attribute != null)
           this.ViewBox = SvgViewbox.Parse(viewBox_attribute.Value);
 
@@ -242,6 +242,20 @@ namespace Svg2Xaml
         }
       }
         
+		// add base element size
+		if (this is SvgSVGElement) {
+			var svg = this as SvgSVGElement;
+
+			DrawingVisual visual = new DrawingVisual();
+			DrawingContext dc = visual.RenderOpen();
+
+			Rect rect = new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(svg.Width.Value, svg.Height.Value));
+			dc.DrawRectangle(System.Windows.Media.Brushes.Transparent, (System.Windows.Media.Pen)null, rect);
+			dc.Close();
+
+			drawing_group.Children.Add(visual.Drawing);
+		}
+
       return drawing_group;
     }
 
