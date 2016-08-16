@@ -126,7 +126,7 @@ namespace Svg2Xaml
         return null;
 
 
-      switch(value)
+      switch(value.ToLower())
       {
         case "black":
           return new SvgColorPaint(new SvgColor((float)(0 / 255.0), (float)(0 / 255.0), (float)(0 / 255.0)));
@@ -136,6 +136,7 @@ namespace Svg2Xaml
           return new SvgColorPaint(new SvgColor((float)(192 / 255.0), (float)(192 / 255.0), (float)(192 / 255.0)));
         case "lime":
           return new SvgColorPaint(new SvgColor((float)(0 / 255.0), (float)(255 / 255.0), (float)(0 / 255.0)));
+		case "lightgray":
         case "gray":
           return new SvgColorPaint(new SvgColor((float)(128 / 255.0), (float)(128 / 255.0), (float)(128 / 255.0)));
         case "olive":

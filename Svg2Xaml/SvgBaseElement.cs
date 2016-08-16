@@ -79,11 +79,11 @@ namespace Svg2Xaml
           if(tokens.Length == 2)
             try
             {
-              element.SetAttributeValue(tokens[0], tokens[1]);
+              element.SetAttributeValue(tokens[0].Trim(), tokens[1].Trim());
             }
             catch(XmlException)
             {
-              continue;
+			  continue;
             }
         }
         style_attribute.Remove();
