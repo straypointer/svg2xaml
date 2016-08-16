@@ -55,7 +55,14 @@ namespace Svg2Xaml
     {
       TransformGroup transform_group = new TransformGroup();
 
-      foreach(SvgTransform transform in Transforms)
+
+      // FROM: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform
+      // The transform attribute defines a list of transform definitions that are applied to an element and the element's children. 
+      // The items in the transform list are separated by whitespace and/or commas, and are applied from >right to left<.
+
+      Transforms.Reverse();
+
+      foreach (SvgTransform transform in Transforms)
         transform_group.Children.Add(transform.ToTransform());
 
       return transform_group;
