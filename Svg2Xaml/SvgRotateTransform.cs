@@ -60,8 +60,8 @@ namespace Svg2Xaml
     {
       string[] tokens = transform.Split(new char[] { ' ', '\t', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-      if(tokens.Length == 1)
-        return new SvgRotateTransform(Double.Parse(tokens[0].Trim(), CultureInfo.InvariantCulture.NumberFormat));
+      if (tokens.Length <= 3)     // was 1
+		return new SvgRotateTransform(Double.Parse(tokens[0].Trim(), CultureInfo.InvariantCulture.NumberFormat));
       
       throw new NotSupportedException();
     }
