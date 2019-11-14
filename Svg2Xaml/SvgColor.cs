@@ -2,7 +2,7 @@
 //
 //  SvgColor.cs - This file is part of Svg2Xaml.
 //
-//    Copyright (C) 2009,2011 Boris Richter <himself@boris-richter.net>
+//    Copyright (C) 2009 Boris Richter <himself@boris-richter.net>
 //
 //  --------------------------------------------------------------------------
 //
@@ -21,9 +21,9 @@
 //
 //  --------------------------------------------------------------------------
 //
-//  $LastChangedRevision$
-//  $LastChangedDate$
-//  $LastChangedBy$
+//  $LastChangedRevision: 18569 $
+//  $LastChangedDate: 2009-03-18 14:05:21 +0100 (Wed, 18 Mar 2009) $
+//  $LastChangedBy: unknown $
 //
 ////////////////////////////////////////////////////////////////////////////////
 using System;
@@ -60,10 +60,18 @@ namespace Svg2Xaml
     //==========================================================================
     public SvgColor(byte red, byte green, byte blue)
     {
-      Red = red / 255.0f;
-      Green = green / 255.0f;
-      Blue = blue / 255.0f;
-    }
+			// changes from https://github.com/ScheugenpflugAG/Svg2Xaml/blob/master/Svg2Xaml/SvgColor.cs
+			// something something ScRGB does not map linearly to RGB, so cannot simply divide by 255.0f
+			// more here - https://stackoverflow.com/questions/13096933/fromargb-vs-fromscrgb
+
+			//Red = red / 255.0f;
+			//Green = green / 255.0f;
+			//Blue = blue / 255.0f;
+			Color c = Color.FromRgb(red, green, blue);
+			Red = c.ScR;
+			Green = c.ScG;
+			Blue = c.ScB;
+		}
 
     //==========================================================================
     public Color ToColor()
